@@ -1,0 +1,1 @@
+Please placed all file in htdocs in xampp -> htdocs (without name file in htdocs)
