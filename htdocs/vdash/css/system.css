@@ -1,0 +1,65 @@
+@import url(http://fonts.googleapis.com/css?family=Cousine:700);
+
+/* Gritter Styling */
+.gritter-item-wrapper.success .gritter-top {
+	background: url(../images/gritter-success.png) no-repeat left -30px;
+}
+
+.gritter-item-wrapper.success .gritter-item {
+	background: url(../images/gritter-success.png) no-repeat left -40px;
+}
+
+.gritter-item-wrapper.success .gritter-bottom {
+	background: url(../images/gritter-success.png) no-repeat left bottom;
+}
+
+.gritter-item-wrapper.danger .gritter-top {
+	background: url(../images/gritter-danger.png) no-repeat left -30px;
+}
+
+.gritter-item-wrapper.danger .gritter-item {
+	background: url(../images/gritter-danger.png) no-repeat left -40px;
+}
+
+.gritter-item-wrapper.danger .gritter-bottom {
+	background: url(../images/gritter-danger.png) no-repeat left bottom;
+}
+
+.gritter-item-wrapper.success .gritter-title {
+	color: #000;
+	text-shadow: none;
+}
+
+.gritter-item-wrapper.success .gritter-item {
+	color: #000;
+}
+
+.gritter-item-wrapper.success.hover .gritter-top,
+.gritter-item-wrapper.danger.hover .gritter-top {
+	background-position: right -30px;
+}
+
+.gritter-item-wrapper.success.hover .gritter-item,
+.gritter-item-wrapper.danger.hover .gritter-item {
+	background-position: right -40px;
+}
+
+.gritter-item-wrapper.success.hover .gritter-bottom,
+.gritter-item-wrapper.danger.hover .gritter-bottom {
+	background-position: right bottom;
+}
+
+/* Slotter Styles */
+.slotter {
+    height: 100px;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    font: 700 120px/100px 'Cousine', sans-serif;
+}
+.slotter .digits {
+    float: left;
+    position: relative;
+    line-height: 100px;
+}

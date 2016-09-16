@@ -1,0 +1,26 @@
+/* Bootstrap table like styling */
+.bootstrap-table .cell {
+	/* Cell Padding */
+	padding: 10px;
+}
+
+.bootstrap-table .header-row {
+	border-bottom: 2px solid #ddd;
+}
+
+.bootstrap-table .header-row .cell {
+	font-weight: bold;
+}
+
+.bootstrap-table .data-rows .row.odd {
+	background-color: #eee;
+}
+
+.bootstrap-table .data-rows .column-label {
+	font-weight: bold;
+}
+
+.bootstrap-table .column-data .btn {
+	margin-bottom: 5px;
+	margin-right: 5px;
+}

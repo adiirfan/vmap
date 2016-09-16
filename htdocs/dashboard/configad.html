@@ -1,0 +1,149 @@
+<style> .checkbox{
+        margin: 0;
+    }
+
+    .highlight{
+        background-color: #ffc;
+    }
+
+    .btn{
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+
+</style>
+
+<h1 class="page-header">Active Directory Config
+    <button   type="button" class="btn btn-default button-view-profile button-add-user" data-toggle="modal" data-target="#modal-add-admin" style="float:right">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Add AD
+    </button>
+</h1>
+
+
+<div class="container-fluid">
+    <table id ="table-admin-overview" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Actions</th>
+                <th>Account Suffix</th>
+                <th class ="column-header">Domain Controller 1 </th>
+				<th class ="column-header">Domain Controller 2</th>
+				<th class ="column-header">Base dn</th>
+				<th class ="column-header">Username Admin</th>
+				<th class ="column-header">Connect</th>
+            </tr>
+        </thead>
+        <tbody id ="table-admin-body">
+
+        </tbody>
+    </table>
+</div>
+
+<div style = "display:none">
+    
+	<button  type="button" class="btn btn-success button-view-profile btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+        <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+    </button>
+  
+
+    <button  type="button" class="btn btn-danger button-delete-profile btn-sm" data-toggle="tooltip" data-placement="top" title="Delete">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </button>
+</div>
+
+<!--Add Administrator Modal-->
+<div class="modal fade" id="modal-add-admin" tabindex="-1" role="dialog" aria-labelledby="ModalAddAdmin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ModalAddAdmin">Active Directory</h4>
+            </div>
+            <div id="modal-body-add-admin" class="modal-body">
+                <div class="form-group">
+                    <label for="input-name">Account Suffix</label>
+                    <input type="text" class="form-control" id="input-suffix" placeholder="@domainname.com">
+					 <input type="hidden" class="form-control" id="input-id" placeholder="@domainname.com">
+                </div>
+                <div>
+                    <div class="form-group" style ="display: inline-block ;width: 45%" >
+                        <label for="input-username">Domain Controller 1</label>
+                        <input type="text" class="form-control" id="input-controller-1" placeholder="IP Address, ex : 192.168.0.1">
+                    </div>
+                    <div class="form-group" style ="display : inline-block ;width: 45%; float :right">
+                        <label for="input-password">Domain Controller 2</label>
+                        <input type="text" class="form-control" id="input-controller-2" placeholder="domainname.com">
+                    </div>
+                </div>
+				 <div class="form-group">
+                    <label for="input-name">Base dn</label>
+                    <input type="text" class="form-control" id="input-base" placeholder="dc=domainname,dc=com">
+                </div>
+				<div class="form-group">
+                    <label for="input-name">Admin Username</label>
+                    <input type="text" class="form-control" id="input-username" placeholder="Admin username">
+                </div>
+				<div class="form-group">
+                    <label for="input-name">Admin Password</label>
+                    <input type="password" class="form-control" id="input-password" placeholder="Admin password">
+                </div>
+				<div class="form-group">
+                    <label for="input-name">Category</label>
+                    <select name="input-category" id="input-category" class="form-control">
+					<option value="1">Student</option>
+					<option value="2">Teacher</option>
+					<option value="3">Staff</option>
+					</select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="button-confirm-add-admin" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Delete Admin Modal-->
+<div class="modal fade" id ="modal-delete-admin" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete Confirmation</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Are you sure you want delete this AD? <!-- <span id = "admin-to-delete"></span>?--></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button-confirm-delete-admin">Delete</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--View Admin Modal-->
+<div class="modal fade" id ="modal-view-admin" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Student Information</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr><th>Name</th> <td id="table-name"> </td></tr>
+                        <tr><th>Username</th> <td id="table-username"> </td></tr>                  
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script src="js/ad.js"></script>

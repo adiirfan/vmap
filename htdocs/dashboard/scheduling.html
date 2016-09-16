@@ -1,0 +1,77 @@
+<style>
+    button.list-group-item {
+        font-size : smaller;
+
+    }
+
+    button.list-group-item-active, button.list-group-item:focus{
+        font-weight : bold;
+        background-color: rgb(210, 228, 232);
+        outline: none;       
+    }
+
+    .export-icon{
+        width: 32px;
+        height : 32px;
+        display : inline-block;
+        /*        border : #CECECE 1px solid;
+                border-radius: 3px;*/
+    }
+
+    #pdf-export{
+        background-image : url("images/pdf-icon.png");
+        background-size : contain;
+        background-repeat : no-repeat;
+        background-position: center;
+    }
+
+    #excel-export{
+        background-image : url("images/excel-icon.png");
+        background-size : contain;
+        background-repeat : no-repeat;
+        background-position: center;
+    }
+
+
+</style>
+<h1 class="page-header">Scheduling</h1>
+<div class = "row">
+    <div class = "col-md-2">
+        <div id="scheduling-lab-list" class="list-group">
+            <!--            <button type="button" class="list-group-item">Cras justo odio</button>
+                        <button type="button" class="list-group-item">Dapibus ac facilisis in</button>
+                        <button type="button" class="list-group-item">Morbi leo risus</button>
+                        <button type="button" class="list-group-item">Porta ac consectetur ac</button>
+                        <button type="button" class="list-group-item">Vestibulum at eros</button>-->
+        </div>
+    </div>
+    <div class = "col-md-10">
+        <!--        <input value="Export to Excel" type="button" onclick='scheduler.exportToExcel()'>
+                <input value="Export to PDF" type="button" onclick='scheduler.exportToPDF()'>-->
+        <div id="scheduler_here" class="dhx_cal_container panel panel-default" style='width:100%; height:500px; min-width: 800px'>
+            <div class="dhx_cal_navline">
+                <div id="pdf-export" class="export-icon" style = "left:270px" onclick='scheduler.exportToPDF({
+                            format: "A3",
+                            orientation: "portrait",
+                            zoom: 1,
+                            header: $(".dhx_cal_date").text(),
+                            footer: "<h4>Powered by CloudDesk</h4>"
+                        })'></div>
+                <div id="excel-export" class="export-icon" style = "left:220px" onclick='scheduler.exportToExcel()'></div>
+                <div class="dhx_cal_prev_button">&nbsp;</div>
+                <div class="dhx_cal_next_button">&nbsp;</div>
+                <div class="dhx_cal_today_button"></div>
+                <div class="dhx_cal_date"></div>
+                <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+                <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+                <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+            </div>
+            <div class="dhx_cal_header"></div>
+            <div class="dhx_cal_data"></div>       
+        </div>
+    </div>
+
+
+</div>
+<script src="http://export.dhtmlx.com/scheduler/api.js"></script> 
+<script src="js/scheduler.js"></script>

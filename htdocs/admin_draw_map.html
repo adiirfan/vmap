@@ -1,0 +1,58 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-script-type" content="text/javascript" />
+        <meta http-equiv="content-style-type" content="text/css" />
+        <link rel="icon" href="./images/clouddesk_favicon.png"/>
+        <title>Virtual Map - Administrator - Draw Map</title>
+        <meta name="description" content="Drag and Drop" />
+
+        <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+        <script type="text/javascript">
+            google.load("jquery", "1.4.2");
+            google.load("jqueryui", "1.7.2");
+        </script>
+        <!--<script type="text/javascript" src="js/google/jquery.min.js"></script>-->
+        <!--<script type="text/javascript" src="js/google/jquery-ui.js"></script>-->
+
+        <!--        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                <script type="text/javascript" src="js/jquery-ui/jquery-ui.js"></script>-->
+        <link rel="stylesheet" href="stylesheets/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" href="stylesheets/draw-map.css" media="all" />
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+            <div id="bin">
+
+            </div>
+
+            <div id="options">
+                <div id="drag1" class="drag PC-icon MAC"></div> <!-- end of drag1 -->
+                <div id="drag3" class="drag PC-icon PC"></div> <!-- end of drag3 -->
+                <div id="drag5" class="drag"></div> <!-- end of drag5 -->
+                <div id="drag6" class="drag"></div>  <!-- end of drag6 -->
+            </div><!-- end of options -->
+
+
+            <div id="frame" style="position:relative">
+            </div><!-- end of frame -->
+        </div><!-- end of wrapper -->
+
+        <div id="pcDialog">
+            Insert the Computer Name
+            <input type="text" id="pcTextBox" />
+        </div>
+        <div id="labDialog">
+            Insert the Lab Name
+            <input type="text" id="labTextBox" />
+        </div>
+        <button type="button" id="savemap" onclick=$("#labDialog").dialog("open")> Save </button>
+
+
+        <script src="js/admin-draw-map.js"></script>
+    </body>
+</html>

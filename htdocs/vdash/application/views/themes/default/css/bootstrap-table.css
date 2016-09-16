@@ -1,0 +1,51 @@
+/* bootstrap column listing styles */
+.bootstrap-table {
+	padding: 0px 15px;
+	margin-top: 10px;
+	background-color: #fff;
+}
+
+.bootstrap-table .header-row {
+	font-weight: bold;
+	border-bottom: 2px solid #ddd;
+	border-top: 2px solid #ddd;
+}
+
+.bootstrap-table .header-row a {
+	color: #333;
+}
+
+.bootstrap-table .cell {
+	padding: 5px;
+	word-wrap: break-word;
+}
+
+.bootstrap-table .data-rows .row.even {
+	background-color: #eee;
+}
+
+.bootstrap-table .data-row .column-label {
+	font-weight: bold;
+}
+
+.bootstrap-detail-table .data-rows .data-row {
+	border-top: 1px solid #ddd;
+	line-height: normal;
+}
+
+.bootstrap-detail-table .data-rows .data-row > * {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+}
+
+.bootstrap-detail-table .data-rows .data-row .label {
+	color: #000;
+	font-weight: bold;
+	text-align: left;
+	font-size: 100%;
+}
+
+.bootstrap-detail-table .data-rows .data-row.odd {
+	background-color: #f9f9f9;
+}

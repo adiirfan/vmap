@@ -1,0 +1,1 @@
+<input type="password" name="<?php echo $field->get_name(); ?>" value="" <?php echo $html_attribute; ?> />

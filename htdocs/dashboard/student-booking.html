@@ -1,0 +1,127 @@
+<style> .checkbox{
+        margin: 0;
+    }
+
+    .highlight{
+        background-color: #ffc;
+    }
+
+    .btn{
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+
+</style>
+
+<h1 class="page-header">Student Booking
+   
+</h1>
+
+
+<div class="container-fluid">
+    <table id ="table-admin-overview" class="table table-hover table-condensed">
+        <thead>			<tr>				<td colspan="4"><button id="button-display-active" type="button" class="btn btn-primary">Active Booking</button></td>				<td colspan="4"><button id="button-display-expired" type="button" class="btn btn-primary">Expired Booking</button></td>			</tr>			<div class="clear" style="padding-top:20px;"></div>
+            <tr>
+                <th></th>
+                <th>Actions</th>
+                <th>Student</th>
+                <th class ="column-header">PC</th>
+				 <th class ="column-header">Lab</th>
+				  <th class ="column-header">Start</th>
+				   <th class ="column-header">End</th>
+				    <th class ="column-header">Duration</th>
+            </tr>
+        </thead>
+        <tbody id ="table-admin-body">
+
+        </tbody>
+    </table>
+</div>
+
+<div style = "display:none">
+    
+
+    <button  type="button" class="btn btn-info button-edit-profile btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+    </button>
+
+    <button  type="button" class="btn btn-danger button-delete-profile btn-sm" data-toggle="tooltip" data-placement="top" title="Cancel">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true">Cancel</span>
+    </button>
+</div>
+
+<!--Add Administrator Modal-->
+<div class="modal fade" id="modal-add-admin" tabindex="-1" role="dialog" aria-labelledby="ModalAddAdmin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ModalAddAdmin">Add Student</h4>
+            </div>
+            <div id="modal-body-add-admin" class="modal-body">
+                <div class="form-group">
+                    <label for="input-name">Student Name</label>
+                    <input type="text" class="form-control" id="input-name" placeholder="Name">
+                </div>
+                <div>
+                    <div class="form-group" style ="display: inline-block ;width: 45%" >
+                        <label for="input-username">Student Username</label>
+                        <input type="text" class="form-control" id="input-username" placeholder="Username">
+                    </div>
+                    <div class="form-group" style ="display : inline-block ;width: 45%; float :right">
+                        <label for="input-password">Password</label>
+                        <input type="password" class="form-control" id="input-password" placeholder="Password">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="button-confirm-add-admin" type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Delete Admin Modal-->
+<div class="modal fade" id ="modal-delete-admin" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete Confirmation</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Are you sure you want to cancel this book <span id = "admin-to-delete"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button-confirm-delete-admin">Cancel book</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--View Admin Modal-->
+<div class="modal fade" id ="modal-view-admin" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Student Information</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr><th>Name</th> <td id="table-name"> </td></tr>
+                        <tr><th>Username</th> <td id="table-username"> </td></tr>                  
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script src="js/student-booking.js"></script>
+
+

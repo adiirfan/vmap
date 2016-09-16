@@ -1,0 +1,41 @@
+@CHARSET "ISO-8859-1";
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: Arial, Helvetica, Sans-serif;
+	min-height: 100%;
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+}
+
+.page-title {
+	display: block;
+	border-bottom: 1px solid #ddd;
+	margin: 15px -15px;
+	padding: 10px 15px;
+}
+
+.flexiwidth .form-control {
+	width: auto;
+}
+
+.progress-bar .reading {
+	text-shadow: 0px 0px 3px #000;
+}
+
+.message {
+	position: absolute;
+	z-index: 5000;
+	width: 500px;
+	margin: 0px auto;
+	left: 50%;
+	margin-left: -250px;
+}
+
+.text-bold {
+	font-weight: bold;
+}

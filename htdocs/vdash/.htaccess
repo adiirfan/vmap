@@ -1,0 +1,13 @@
+RewriteEngine on
+
+#RewriteBase /
+
+SetEnv TZ Asia/Kuala_Lumpur
+
+# Forwarding themes request to the appropriate theme directory.
+RewriteCond %{REQUEST_URI} \/themes\/[^\/]+\/(images|css|javascript|js)(\/?|\/.+)$
+RewriteRule ^themes/(.*)$ application/views/themes/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L]

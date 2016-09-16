@@ -1,0 +1,81 @@
+ jQuery.ajax({
+            type: "POST",
+            url: "php/validate_json.php?start="+date_1+"/"+min_1+"&end="+date_2+"/"+min_2+"&pc="+pc,
+            dataType: 'json',
+            data: {start: date_1},
+                success: function(res) {
+					//alert(res.code);
+					
+					  sweetAlert("Oops...", "Something went wrong!"+res.result, "error");
+					     if (res.result != "Success")){
+                            swal({
+                                title             : "Error!",
+                                text              : "The Bid field is required.",
+                                type              : "error",
+                                confirmButtonClass: "btn-info"
+                            });
+                            return;
+                        }
+                    
+					  
+					  
+					  
+					  // Sweet Alert
+                        swal({
+                            title: 'Konfirmasi Bid',
+                            text:
+                            '<label>Pinjaman</label>'+
+                            '<br>'+
+                            '<br><br>'+
+                            '<label>Kode Pinjaman</label>'+
+                            '<br>'+
+                         
+                            '<br><br>'+
+                            '<label>Tenor</label>'+
+                            '<br>'+
+                        
+                            '<br><br>'+
+                            '<label>Perusahaan</label>'+
+                            '<br>'+
+                         
+                            '<br><br>'+
+							  '<label>Bid Anda</label>',
+                          
+                          //  '<br><br>'+
+                         //   'By clicking "Confirm", you agree to be bound by the <a id="t-c" href="#">terms & conditions</a> stated in the Agreement.',
+                            html               : true,
+                            confirmButtonText  : 'Konfirmasi',
+                            confirmButtonClass : "btn-info",
+                            showCancelButton   : true,
+                            closeOnConfirm     : false,
+                            showLoaderOnConfirm: true
+                        }, function() {
+                           
+						  
+						 //  proceed ()
+						 //alert($("#h_amount").val($(text).val()));
+						
+                            setTimeout(function() {
+                                swal({
+                                    title            : "Berhasil!",
+									text			 :	'<br><label>Silahkan cek email anda untuk konfirmasi</label>',
+									html               : true,	
+                                    type             : "success",
+                                    timer            : 4000,
+                                    showConfirmButton: false
+                                });
+                            }, 2000);
+							
+							 setTimeout(function() {
+                                $('#formku').attr('action', '<?php echo base_url(); ?>php/bid');
+                            document.getElementById("formku").submit();
+                            }, 5000);
+                                
+                         
+							
+                        });
+
+
+					  
+				}
+			});

@@ -1,0 +1,174 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 29, 2016, 5:19:46 AM
+    Author     : vmap
+*/
+
+/**************************DRAGGED************************/
+#drag1 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/White_Monitor/Black-White-Mac.png");
+    width:52px;
+    height:52px;
+}
+
+#drag2 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/mac_green_32x32.png");
+    width:52px;
+    height:52px;
+}
+
+#drag3 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/White_Monitor/Black-White-Windows.png");
+    width:52px;
+    height:52px;
+}
+
+#drag4 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/pc_green_32x32.png");
+    width:52px;
+    height:52px;
+}
+
+#drag5 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/hor_line_32x32.png");
+    width:32px;
+    height:32px;
+}
+
+#drag6 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/ver_line_32x32.png");
+    width:32px;
+    height:32px;
+}
+
+#drag7 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/Table/Table_Up.png");
+    width:85px !important;
+    height:70px;
+}
+
+#drag8 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/Table/Table_Down.png");
+    width:85px !important;
+    height:70px;
+}
+
+#drag9 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/Table/Table_Left.png");
+    width:85px !important;
+    height:70px;
+}
+
+#drag10 {
+    margin-left:15px;
+    margin-top:15px;
+    background-image: url("../images/Table/Table_Right.png");
+    width:85px !important;
+    height:70px ;
+} 
+
+
+/********************DRAGGED**********************************/
+.MAC-status-off {
+    position:absolute; 
+    background-image: url("../images/White_Monitor/Black-White-Mac.png");
+    background-repeat: no-repeat;
+    width:32px;
+    height:32px;
+}
+
+.dragged2 {
+    position:absolute; 
+    background-image: url("../images/mac_green_32x32.png");
+    background-repeat: no-repeat;
+    width:32px;
+    height:32px;
+}
+
+.PC-status-off{
+    position:absolute; 
+    background-image: url("../images/White_Monitor/Black-White-Windows.png");
+    background-repeat: no-repeat;
+    width:32px;
+    height:32px;
+}
+
+.dragged4 {
+    position:absolute; 
+    background-image: url("../images/pc_green_32x32.png");
+    background-repeat: no-repeat;
+    width:32px;
+    height:32px;
+}
+
+.dragged5 {
+    position:absolute; 
+    background-image: url("../images/hor_line_32x32.png");
+    background-repeat: no-repeat;
+    width:32px;
+    height:32px;
+}
+
+.dragged6 {
+    position:absolute; 
+    background-image: url("../images/ver_line_32x32.png");
+    background-repeat: no-repeat;
+    width:32px;
+    height:32px;
+}
+
+.dragged7 {
+    position:absolute; 
+    background-image: url("../images/Table/Table_Up.png");
+    background-repeat: no-repeat;
+    width:85px !important;
+    height:100px;
+}
+
+.dragged8 {
+    position:absolute; 
+    background-image: url("../images/Table/Table_Down.png");
+    background-repeat: no-repeat;
+    width:85px !important;
+    height:100px;
+}
+
+.dragged9 {
+    position:absolute; 
+    background-image: url("../images/Table/Table_Left.png");
+    background-repeat: no-repeat;
+    width:85px !important;
+    height:100px;
+}
+
+.dragged10 {
+    position:absolute; 
+    background-image: url("../images/Table/Table_Right.png");
+    background-repeat: no-repeat;
+    width:85px !important;
+    height:100px;
+}
+
+/*****************************************************************************/

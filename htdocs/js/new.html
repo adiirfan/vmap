@@ -1,0 +1,35 @@
+<html>
+
+<body>
+
+ <p id="demo2"></p>
+
+ <script>
+
+   var text = '{"h":["username","hair_color","height"],"d":[["ali","brown",1.2],["ma0072c","blue",1.4],["joe","brown",1.7],["zehua","black",1.8]]}';
+
+   var obj = JSON.parse(text);
+
+   //var newjson = [];
+
+   //for (var i = 0 ; i < obj.d.length; i++){ 
+
+    //var hasil= {};
+
+   // for(var j= 0; j < obj.h.length; j++) {
+
+     // hasil[obj.h[j]] = obj.d[i][j];    
+
+    //}
+
+   // newjson.push(hasil);
+
+   //}
+
+  document.getElementById("demo2").innerHTML = JSON.stringify(obj);
+
+</script>
+
+</body>
+
+</html>

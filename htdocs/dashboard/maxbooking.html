@@ -1,0 +1,163 @@
+<h1 class="page-header" align="center">Maximum Booking</h1>
+
+<html>
+ <!--Sweet Alert-->
+		<link href="assets/js/bootstrap-sweetalert-master/dist/sweetalert.css" rel="stylesheet" type="text/css">
+		<script src="assets/js/bootstrap-sweetalert-master/dist/sweetalert.min.js" type="text/javascript"></script>
+<body>
+<div class="row">
+ <div class="col-lg-2" style="margin-left:100px;margin-right:100px;">
+
+ </div>
+ <div class="col-lg-4 col-xs-12" style="padding-left:50px" >
+<form action="" class="form-inline" method="post">
+ <div class="form-group">
+  <label>Hour</label>
+<div class="hour_60">
+        <select class="form-control" name="hour" id="hour"></select>
+</div>
+</div>
+ <div class="form-group">
+  <label>Minutes</label>
+<div class="min_60">
+        <select class="form-control" name="min" id="min"></select>
+</div>
+</div>
+</br></br>
+
+<input class="btn btn-primary" type="submit" onclick="update()" value="Update">
+
+
+</form>
+
+</div>
+</div>
+<div class="clear" style="padding-top:50px;"></div>
+<div>
+	<ul class="alert alert-warning" style="padding-left:30px;">
+		<li>Student Maximum Booking is maximum time for student to book a pc</li>
+	</ul>
+</div>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+
+//For Hour
+var opsi=[];
+  
+for (i = 0; i <= 48; i++) { 
+
+		if(i < 10){
+		opsi[i]='0'+i;
+		}else {
+		opsi[i]=i;
+		}
+
+
+}
+
+$.each(opsi, function(val, text) {
+    $('#hour').append(new Option(text,val));
+});
+
+
+//For Minutes
+var min=[];
+  
+for (i = 0; i <= 60; i++) { 
+
+		if(i < 10){
+		min[i]='0'+i;
+		}else {
+		min[i]=i;
+		}
+
+}
+
+$.each(min, function(val, text) {
+    $('#min').append(new Option(text,val));
+});
+
+		//Get curenly default value
+		jQuery.ajax({
+            type: "POST",
+            url: "php/time_get.php",
+            dataType: 'json',
+            success: function(res) {
+			var x=res.hour;
+			var y=res.min;
+			var hour_1=x.slice(0,1);
+			var hour_2=x.slice(1,2);
+			
+			var min_1=y.slice(0,1);
+			var min_2=y.slice(1,2);
+			
+			
+			var nilai_hour;
+			if(hour_1 == 0){
+			nilai_hour=hour_2;
+			}else{
+				nilai_hour=res.hour;
+			}
+			
+			var nilai_min;
+			if(min_1 == 0){
+			nilai_min=min_2;
+			}else{
+				nilai_min=res.min;
+			}
+			
+			
+			$("div.hour_60 select").val(nilai_hour);
+			$("div.min_60 select").val(nilai_min);
+	
+				}
+			});
+
+
+});
+
+function update(){
+
+		var hour =$('#hour').val();
+		var min =$('#min').val();
+
+		
+		
+		var nilai_hour;
+		
+			if(hour.length == 1){
+			nilai_hour='0'+hour;
+			}else{
+			nilai_hour=hour;
+			}
+			
+		var nilai_min;
+		
+			if(hour.length == 1){
+			nilai_min='0'+min;
+			}else{
+				nilai_min=min;
+			}
+		
+		alert("Success Update data");
+		jQuery.ajax({
+            type: "POST",
+            url: 'php/time_get.php?time='+nilai_hour+':'+nilai_min,
+            dataType: 'json',
+            success: function(res) {
+			
+			
+			
+			
+							
+	
+				}
+			});
+		
+
+}
+
+</script>

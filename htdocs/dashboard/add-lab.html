@@ -1,0 +1,222 @@
+<style>
+    .progress{
+        margin-bottom: 0;
+    }
+
+    #upload ul li p{
+        overflow: hidden;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+    #upload ul li i{
+        float: right;
+    }
+	.test1{
+		display:none;
+	}
+	*{
+    box-sizing:border-box;
+	}
+	.frame {
+    background-image: url('images/grid.png');
+    background-size :100% 100%;
+	
+
+	}
+	
+	
+</style>
+
+<h1 class="page-header">Lab Design - Add Lab<img id="test2" src="uploads/trial.png" style="width: 100px;margin-left:10px;display:none;"></img><img class="test1"  src="uploads/trial.png" style="width: 100px;margin-left:10px;"></img></h1>
+<div style="border-bottom: 1px solid #eee; padding-bottom: 9px" class="button-lab-groups">  
+    <button id="button-load-map" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Load Map">
+        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+    </button>
+
+
+    <button id="button-upload-image" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Upload Image">
+        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+    </button> 
+
+    <button id="button-erase-map" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Erase Map">
+        <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+    </button>
+    <button id="button-save-map" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Save Map" onclick='$("#labDialog").dialog("open")'>
+        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+    </button>
+	 <button id="button-save-map" type="button" class="btn btn-success test2" data-toggle="tooltip" data-placement="top" title="Grid Off" onclick='$(".frame").hide();$(".test").show();$(".test2").hide();'>
+      <span class="	glyphicon glyphicon-th" aria-hidden="true"></span>
+    </button>
+	 <button id="button-save-map" type="button" class="btn btn-success test" data-toggle="tooltip" data-placement="top" title="Grid On" style="display:none" onclick='$(".frame").show();$(".test2").show();$(".test").hide();'>
+      <span class="	glyphicon glyphicon-th" aria-hidden="true"></span>
+    </button>
+</div>
+
+<!--image upload form--> 
+<form id="upload" method="post" action="php/upload.php" enctype="multipart/form-data">
+    <input id="img-upload-input" style="display: none" type="file" name="upl" multiple />
+    <ul>
+    </ul>
+</form>
+
+<div id="wrapper">
+    <div id="bin">
+    </div>
+
+    <div id="options" class="panel panel-default">
+
+        <div class="panel-heading">
+            Map Icons
+        </div>
+        <div class="panel-body">
+            <div id = "icon-menu">
+                <div id="drag1" class="drag PC-icon MAC" style="z-index:1000"></div> <!-- end of drag1 -->
+                <div id="drag3" class="drag PC-icon PC" style="z-index:1000"></div> <!-- end of drag3 -->
+                <div id="drag5" class="drag"></div> <!-- end of drag5 -->
+                <div id="drag6" class="drag"></div> <!-- end of drag6 -->
+                <div id="drag7" class="drag"></div> <!-- end of drag7 -->
+                <div id="drag8" class="drag"></div> <!-- end of drag8 -->
+                <div id="drag9" class="drag"></div> <!-- end of drag8 -->
+                <div id="drag10" class="drag"></div> <!-- end of drag8 -->
+            </div>
+        </div>
+
+
+        <!--        <div class="btn-group-vertical" role="group" style="border: black">
+                    <button type="button" class="btn btn-primary"> Upload Image </button>
+                    <button type="button" class="btn btn-danger"> Erase Map </button>
+                <button type="button" id="savemap" class="btn btn-success" onclick='$("#labDialog").dialog("open")'> Save </button>
+                </div>-->
+    </div><!-- end of options -->
+
+	
+    <div id="frame" style="position:relative" class="panel panel-default "><img id="myImg" src="#" style="display:none;max-width:500px;">
+    <div class="frame" style="width:100%;height:100%;"></div>
+	</div></div><!-- end of frame -->
+	
+	
+	
+    <div id = "dummy" style = "display : none">
+
+    </div>
+    <!--</div>-->
+</div><!-- end of wrapper -->
+
+<div id="pcDialog">
+    Insert the Computer Name
+    <input type="text" id="pcTextBox" />
+    <br>
+    <span id="id-availability"></span>
+</div>
+<div id="labDialog">
+    Insert the Lab Name
+    <input type="text" id="labTextBox" />
+    <label for="lab-group">Select a Lab Group</label>
+    <fieldset>
+        <select name="lab-group" id="lab-group">
+            <!--            <option>IT-Learning-Centre</option>
+                        <option selected="selected">East-Wing</option>
+                        <option>West-Wing</option>-->
+        </select>
+    </fieldset>
+</div>
+
+
+<!--Load Map Modal-->
+<div class="modal fade" id="modal-load-map" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Load Map</h4>
+            </div>
+            <div class="modal-body">
+                <select id ="select-load-map" class="form-control">
+
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button-confirm-load-map">Load Map</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--Save Map Modal-->
+<div class="modal fade" id="modal-save-map" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Save Map</h4>
+      </div>
+      <div class="modal-body">
+        <span id="text-save-map"></span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--jQuery knob plugin-->
+<script src="js/file-upload/jquery.knob.js"></script>
+<script src="js/ResizeSensor.js"></script>
+<script src="js/ElementQueries.js"></script>
+<!--script>
+
+var element = document.getElementById('frame');
+
+    //add columns to the the temp row object
+	
+	new ResizeSensor(element, function() {
+		var baris = document.getElementById('frame').offsetWidth / 100;
+		bar = baris.toFixed(0);
+		var colom = document.getElementById('frame').offsetHeight  / 100;
+		col = colom.toFixed(0);
+		console.log(col);
+		console.log(bar);
+	});
+          
+    new ResizeSensor(element, function() {
+		jQuery('#frame div').html('');
+		var baris = 0;
+		var colom = 0;
+		var baris = document.getElementById('frame').offsetWidth / 100;
+		bar = baris.toFixed(0);
+		var colom = document.getElementById('frame').offsetHeight  / 100;
+		col = colom.toFixed(0);
+		var rows = bar;
+		var columns = col;
+		console.log(col);
+		console.log(bar);
+		var $row = $("<div />", {
+			class: 'row'
+		});
+		var $square = $("<div />", {
+			class: 'square'
+		});
+    for (var i = 0; i < columns; i++) {
+        $row.append($square.clone());
+    }
+    //clone the temp row object with the columns to the wrapper
+    for (var i = 0; i < rows; i++) {
+        $("#frame").append($row.clone());
+    }
+	});
+
+
+</script>
+
+
+<!-- jQuery File Upload Dependencies -->
+<script src="js/file-upload/jquery.ui.widget.js"></script>
+<script src="js/file-upload/jquery.iframe-transport.js"></script>
+<script src="js/file-upload/jquery.fileupload.js"></script>
+
+<!--custom script-->
+<script src="js/admin-draw-map.js"></script>
+<script src="js/admin-upload-map.js"></script>
+

@@ -1,0 +1,161 @@
+<style> .checkbox{
+        margin: 0;
+    }
+
+    .highlight{
+        background-color: #ffc;
+    }
+</style>
+
+
+<h1 class="page-header">Lab Design - Manage Lab</h1>
+
+<div class="container-fluid" style="padding-left : 0">
+    <div >
+        <button id="button-check-all" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+            Select All
+        </button>
+        <button id = "button-uncheck-all" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+            Deselect All
+        </button>
+        <button id = "button-group-lab" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-group-lab">
+            <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+            Group Lab
+        </button>
+        <button id = "button-delete-map" type="button" class="btn btn-default" disabled="" data-toggle="modal" data-target="#modal-delete">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            Delete
+        </button>
+    </div>
+    <table id ="table-lab-delete" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th class ="column-header">Computer Lab</th>
+                <th class ="column-header">Lab Group</th>
+                <th class ="column-header">Stations Available</th>
+                <th class ="column-header">Description</th>
+            </tr>
+        </thead>
+        <tbody id ="table-lab-body">
+
+        </tbody>
+    </table>
+</div> <!--end of container--> 
+
+<!--Group Lab Modal -->
+<div class="modal fade" id="modal-group-lab" tabindex="-1" role="dialog" aria-labelledby="myModalGroup">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalGroup">Lab Grouping</h4>
+            </div>
+            <div id="modal-body-group-lab" class="modal-body">
+                Select a Lab Group to be assigned for: <br> 
+                <ul id="map-to-group">
+
+                </ul> 
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="existing" checked>
+                        Select an existing lab group
+                    </label>
+                    <br>
+                    <label>
+                        <select id ="select-existing-lab" class="form-control">
+                            <!--<option>West-Wing</option>-->
+
+                        </select>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="new">
+                        Enter the name of a new lab group                       
+                    </label>
+                    <br>
+                    <label>
+                        <input id = "text-new-lab" type="text" class="form-control" placeholder="Text input" style = "width : 300px">
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="button-confirm-group-lab" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Lab Modal-->
+<div class="modal fade" id ="modal-edit-lab" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Lab Information</h4>
+            </div>
+            <div class="modal-body">
+                <div class ="row">
+                    <div class = "col-xs-6">
+                        <div class="form-group">
+                            <label for="input-lab-name">Lab Name</label>
+                            <input type="text" class="form-control" id="input-lab-name" placeholder="Lab Name">
+                        </div>
+                    </div>
+                    <div class = "col-xs-6">
+                        <div class="form-group">
+                            <label for="input-lab-group">Staff ID</label>
+                            <input type="text" class="form-control" id="input-lab-group" placeholder="Lab-Group" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col-xs-12">
+                        <div class="form-group">
+                            <label for="input-description">Description</label>
+                            <textarea class="form-control" rows="5" id="input-description" placeholder="Description" style = "resize : none"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id = "button-confirm-edit-lab">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--DeleteMap Modal -->
+<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+            </div>
+            <div id="modal-body-delete" class="modal-body">
+                Are you sure that you want to delete the following map? <br> 
+                <ul id="map-to-delete">
+
+                </ul> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button id="button-confirm-delete" type="button" class="btn btn-primary">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style = "display:none">
+    <button  type="button" class="btn btn-info button-edit-lab btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" style ="font-size : 10px;">
+        <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+    </button>
+</div>
+<script src="js/manage-lab.js"></script>

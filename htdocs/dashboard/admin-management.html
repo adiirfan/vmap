@@ -1,0 +1,162 @@
+<style> .checkbox{
+        margin: 0;
+    }
+
+    .highlight{
+        background-color: #ffc;
+    }
+
+    .btn{
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+
+</style>
+
+<h1 class="page-header">Admin Management    
+    <button id ="button-add-admin"  type="button" class="btn btn-default button-add-user" data-toggle="modal" data-target="#modal-add-admin" style="float:right">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Add Administrator
+    </button>
+</h1>
+
+<div class="container-fluid">
+    <table id ="table-admin-overview" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Actions</th>
+                <th>Username</th>
+                <th class ="column-header">Privilege</th>
+                <th class ="column-header">Email</th>
+            </tr>
+        </thead>
+        <tbody id ="table-admin-body">
+
+        </tbody>
+    </table>
+</div>
+
+<div style = "display:none">
+    <button  type="button" class="btn btn-success button-view-profile btn-sm" data-toggle="tooltip" data-placement="top" title="View">
+        <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+    </button>
+
+    <button  type="button" class="btn btn-info button-edit-profile btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+    </button>
+
+    <button  type="button" class="btn btn-danger button-delete-profile btn-sm" data-toggle="tooltip" data-placement="top" title="Delete">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </button>
+</div>
+
+<!--Add Administrator Modal-->
+<div class="modal fade" id="modal-add-admin" tabindex="-1" role="dialog" aria-labelledby="ModalAddAdmin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ModalAddAdmin">Add Administrator</h4>
+            </div>
+            <div id="modal-body-add-admin" class="modal-body">
+                <div class="form-group">
+                    <label for="input-username">Admin Username</label>
+                    <input type="text" class="form-control" id="input-username" placeholder="Username">
+                </div>
+                <div>
+                    <div class="form-group" style ="display: inline-block ;width: 45%" >
+                        <label for="input-firstname">First Name</label>
+                        <input type="text" class="form-control" id="input-firstname" placeholder="First Name">
+                    </div>
+                    <div class="form-group" style ="display : inline-block ;width: 45%; float :right">
+                        <label for="input-lastname">Last Name</label>
+                        <input type="text" class="form-control" id="input-lastname" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-staffID">Staff ID</label>
+                    <input type="text" class="form-control" id="input-staffID" placeholder="Staff ID">
+                </div>
+                <div class="form-group">
+                    <label for="input-email">Email address</label>
+                    <input type="email" class="form-control" id="input-email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="input-password">Password</label>
+                    <input type="password" class="form-control" id="input-password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="input-confirm-password">Confirm Password</label>
+                    <input type="password" class="form-control" id="input-confirm-password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="select-privilege">Admin Privilege</label>
+                    <select id ="select-privilege" class="form-control">
+                        <option>All</option>
+                        <option>ITStaff</option>
+                        <option>Normal</option>
+                    </select>
+                    <div class="well well-sm" >
+                        <ul style = "font-size: smaller">
+                            <li>All - Has all control in admin panel. </li>
+                            <li>ITStaff - Has all control except managing administrator. </li>
+                            <li>Normal - Able to do lab scheduling and view statistic only. </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="button-confirm-add-admin" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Delete Admin Modal-->
+<div class="modal fade" id ="modal-delete-admin" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <span id = "admin-to-delete"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="button-confirm-delete-admin">Yes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--View Admin Modal-->
+<div class="modal fade" id ="modal-view-admin" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Admin Information</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr><th>Username</th> <td id="table-username"> </td></tr>
+                        <tr><th>First Name</th> <td id="table-firstname"> </td></tr>
+                        <tr><th>Last Name</th> <td id="table-lastname"> </td></tr>
+                        <tr><th>Staff ID</th> <td id="table-staffID"> </td></tr>
+                        <tr><th>Email Address</th>  <td id="table-email"> </td></tr>
+                        <tr><th>Privilege</th> <td id="table-privilege"> </td></tr>                       
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script src="js/admin-management.js"></script>
+
+

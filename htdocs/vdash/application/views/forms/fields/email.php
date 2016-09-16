@@ -1,0 +1,1 @@
+<input type="email" name="<?php echo $field->get_name(); ?>" value="<?php echo $field->get_value(); ?>" <?php echo $html_attribute; ?> />

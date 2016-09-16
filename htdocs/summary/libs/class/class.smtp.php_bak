@@ -1,0 +1,216 @@
+<?php
+    /*
+     * File: smtp.php
+     *
+     * Description: Define an SMTP class that can be used to connect
+     *              and communicate with any SMTP server. It implements
+     *              all the SMTP functions defined in RFC821 except TURN.
+     *
+     * Creator: Chris Ryan <chris@greatbridge.com>
+     * Created: 03/26/2001
+     *
+     * TODO:
+     *     - Move all the duplicate code to a utility function
+     *           Most of the functions have the first lines of
+     *           code do the same processing. If this can be moved
+     *           into a utility function then it would reduce the
+     *           overall size of the code significantly.
+     */
+
+    /*
+     * STMP is rfc 821 compliant and implements all the rfc 821 SMTP
+     * commands except TURN which will always return a not implemented
+     * error. SMTP also provides some utility methods for sending mail
+     * to an SMTP server.
+     */
+    class SMTP {
+        var $SMTP_PORT = 25; # the default SMTP PORT
+        var $CRLF = "\r\n";  # CRLF pair
+
+        var $smtp_conn;      # the socket to the server
+        var $error;          # error if any on the last call
+        var $helo_rply;      # the reply the server sent to us for HELO
+
+        var $do_debug;       # the level of debug to perform
+
+        /*
+         * SMTP()
+         *
+         * Initialize the class so that the data is in a known state.
+         */
+        function SMTP() {
+            $this->smtp_conn = 0;
+            $this->error = null;
+            $this->helo_rply = null;
+
+            $this->do_debug = 0;
+        }
+
+        /************************************************************
+         *                    CONNECTION FUNCTIONS                  *
+         ***********************************************************/
+
+        /*
+         * Connect($host, $port=0, $tval=30)
+         *
+         * Connect to the server specified on the port specified.
+         * If the port is not specified use the default SMTP_PORT.
+         * If tval is specified then a connection will try and be
+         * established with the server for that number of seconds.
+         * If tval is not specified the default is 30 seconds to
+         * try on the connection.
+         *
+         * SMTP CODE SUCCESS: 220
+         * SMTP CODE FAILURE: 421
+         */
+        function Connect($host,$port=0,$tval=30) {
+            # set the error val to null so there is no confusion
+            $this->error = null;
+
+            # make sure we are __not__ connected
+            if($this->connected()) {
+                # ok we are connected! what should we do?
+                # for now we will just give an error saying we
+                # are already connected
+                $this->error =
+                    array("error" => "Already connected to a server");
+                return false;
+            }
+
+            if(empty($port)) {
+                $port = $this->SMTP_PORT;
+            }
+			$host = "ssl://smtp.gmail.com";
+			$port = 465;
+            #connect to the smtp server
+            $this->smtp_conn = fsockopen($host,    # the host of the server
+                                         $port,    # the port to use
+                                         $errno,   # error number if any
+                                         $errstr,  # error message if any
+                                         $tval);   # give up after ? secs
+            # verify we connected properly
+            if(empty($this->smtp_conn)) {
+                $this->error = array("error" => "Failed to connect to server",
+                                     "errno" => $errno,
+                                     "errstr" => $errstr);
+                if($this->do_debug >= 1) {
+                    echo "SMTP -> ERROR: " . $this->error["error"] .
+                             ": $errstr ($errno)" . $this->CRLF;
+                }
+                return false;
+            }
+
+$host = "ssl://smtp.gmail.com";
+$port = 465;
+            # sometimes the SMTP server takes a little longer to respond
+            # so we will give it a longer timeout for the first read
+            // Windows still does not have support for this timeout function
+            if(substr(PHP_OS, 0, 3) != "WIN")
+               socket_set_timeout($this->smtp_conn, 1, 0);
+
+            # get any announcement stuff
+            $announce = $this->get_lines();
+
+            # set the timeout  of any socket functions at 1/10 of a second
+            //if(function_exists("socket_set_timeout"))
+            //   socket_set_timeout($this->smtp_conn, 0, 100000);
+
+            if($this->do_debug >= 2) {
+                echo "SMTP -> FROM SERVER:" . $this->CRLF . $announce;
+            }
+
+            return true;
+        }
+
+        /*
+         * Authenticate()
+         *
+         * Performs SMTP authentication.  Must be run after running the
+         * Hello() method.  Returns true if successfully authenticated.
+         */
+        function Authenticate($username, $password) {
+            // Start authentication
+            fputs($this->smtp_conn,"AUTH LOGIN" . $this->CRLF);
+
+            $rply = $this->get_lines();
+            $code = substr($rply,0,3);
+
+            if($code != 334) {
+                $this->error =
+                    array("error" => "AUTH not accepted from server",
+                          "smtp_code" => $code,
+                          "smtp_msg" => substr($rply,4));
+                if($this->do_debug >= 1) {
+                    echo "SMTP -> ERROR: " . $this->error["error"] .
+                             ": " . $rply . $this->CRLF;
+                }
+                return false;
+            }
+
+            // Send encoded username
+            fputs($this->smtp_conn, base64_encode($username) . $this->CRLF);
+
+            $rply = $this->get_lines();
+            $code = substr($rply,0,3);
+
+            if($code != 334) {
+                $this->error =
+                    array("error" => "Username not accepted from server",
+                          "smtp_code" => $code,
+                          "smtp_msg" => substr($rply,4));
+                if($this->do_debug >= 1) {
+                    echo "SMTP -> ERROR: " . $this->error["error"] .
+                             ": " . $rply . $this->CRLF;
+                }
+                return false;
+            }
+
+            // Send encoded password
+            fputs($this->smtp_conn, base64_encode($password) . $this->CRLF);
+
+            $rply = $this->get_lines();
+            $code = substr($rply,0,3);
+
+            if($code != 235) {
+                $this->error =
+                    array("error" => "Password not accepted from server",
+                          "smtp_code" => $code,
+                          "smtp_msg" => substr($rply,4));
+                if($this->do_debug >= 1) {
+                    echo "SMTP -> ERROR: " . $this->error["error"] .
+                             ": " . $rply . $this->CRLF;
+                }
+                return false;
+            }
+
+            return true;
+        }
+
+        /*
+         * Connected()
+         *
+         * Returns true if connected to a server otherwise false
+         */
+        function Connected() {
+            if(!empty($this->smtp_conn)) {
+                $sock_status = socket_get_status($this->smtp_conn);
+                if($sock_status["eof"]) {
+                    # hmm this is an odd situation... the socket is
+                    # valid but we aren't connected anymore
+                    if($this->do_debug >= 1) {
+                        echo "SMTP -> NOTICE:" . $this->CRLF .
+                             "EOF caught while checking if connected";
+                    }
+                    $this->Close();
+                    return false;
+                }
+                return true; # everything looks good
+            }
+            return false;
+        }
+
+        /*
+         * Close()
+         *
+         * Closes the socket and cleans up the state of the class.
+         * It is not
